@@ -24,7 +24,7 @@ connectDB();
 First approach:
 everything is written in the index file only , this approach is 
 also good and accepted but this pollutes index file very much, so another
-approach is to create a separate file to database connection and just import 
+approach is to create a separate file of database connection and just import 
 that file in index file
 import express from "express";
 
