@@ -16,4 +16,14 @@ const connectDB = async() => {
     }
 
 }
+
+// We communicate with the database multiple times . This part will be common everytime . 
+// So , we can create a separate file and wrap this function inside that file and whenever needed ,  
+// we can use that file
+// we are creating the file inside the utils folder
+
+
+
+
+
 export default connectDB

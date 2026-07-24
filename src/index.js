@@ -1,12 +1,13 @@
 // require('dotenv').config({path: './env'}) this makes the code 
 // inconsistent as somewhere it is import and now require
-
 import dotenv from 'dotenv'
 
 import mongoose from "mongoose";
 import { DB_NAME } from "./constant.js";
 import connectDB from "./db/index.js"; // 2nd approach
+import express from "express";
 
+const app  = express();
 // dotenv needs to be configured separately
 dotenv.config({
     path: './env'
@@ -14,8 +15,24 @@ dotenv.config({
 
 
 
-connectDB();
 
+// since the connectDB method is async , and whenever an asynchronous 
+// method is completed, it returns a promise
+connectDB()
+.then(() => {
+    app.on("error" , (error)=>{
+        console.log("Error is : " , error);
+        throw error;
+    })
+    app.listen(process.env.PORT || 8000 , ()=>{
+        console.log(`server is running at port : ${process.env.PORT}`);
+        
+    })
+})
+.catch((error) => {
+    console.log("MONGODB CONNECTION FAILED !!!" , err);
+    
+})
 
 
 
@@ -26,9 +43,6 @@ everything is written in the index file only , this approach is
 also good and accepted but this pollutes index file very much, so another
 approach is to create a separate file of database connection and just import 
 that file in index file
-import express from "express";
-
-const app  = express();
 
 
 ;(async () => {
