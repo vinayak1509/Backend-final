@@ -19,3 +19,4 @@ app.use(express.static("public")) // sometimes , we need to store some files lik
 //  we create a folder "pubblic" and store those files in this folder. The same folder is being configured through static
 app.use(cookieParser())
 export default app;
+

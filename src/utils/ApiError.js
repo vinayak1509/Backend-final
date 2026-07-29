@@ -27,7 +27,7 @@ class ApiError extends Error {
         } 
         // stacktrace keeps a track of where the error occured.
         //It tells Node.js to generate a stack trace starting from where the ApiError was created,
-         //rather than including the constructor itself.
+        //rather than including the constructor itself.
 
     }
 }
