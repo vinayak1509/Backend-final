@@ -2,16 +2,15 @@
 // inconsistent as somewhere it is import and now require
 import dotenv from 'dotenv'
 
-import mongoose from "mongoose";
-import { DB_NAME } from "./constant.js";
-import connectDB from "./db/index.js"; // 2nd approach
-import express from "express";
-
-const app  = express();
 // dotenv needs to be configured separately
 dotenv.config({
     path: './env'
 })
+
+import mongoose from "mongoose";
+import { DB_NAME } from "./constant.js";
+import connectDB from "./db/index.js"; // 2nd approach
+import app from "./app.js"; // import the app with all routes registered
 
 
 
@@ -20,19 +19,25 @@ dotenv.config({
 // method is completed, it returns a promise
 connectDB()
 .then(() => {
-    app.on("error" , (error)=>{
-        console.log("Error is : " , error);
+    app.on("error", (error) => {
+        console.log("Error is :", error);
         throw error;
-    })
-    app.listen(process.env.PORT || 8000 , ()=>{
-        console.log(`server is running at port : ${process.env.PORT}`);
-        
-    })
+    });
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`server is running at port : ${process.env.PORT || 8000}`);
+    });
 })
 .catch((error) => {
-    console.log("MONGODB CONNECTION FAILED !!!" , err);
-    
-})
+    console.log("MONGODB CONNECTION FAILED !!!", error);
+    app.on("error", (err) => {
+        console.log("Error is :", err);
+        throw err;
+    });
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`server is running at port : ${process.env.PORT || 8000}`);
+        console.log("Database features will be unavailable until MongoDB is reachable.");
+    });
+});
 
 
 
