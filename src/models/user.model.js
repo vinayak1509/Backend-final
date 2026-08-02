@@ -50,7 +50,7 @@ const userSchema = new Schema({
 
 
 
-}, { timestamp: true })
+}, { timestamps: true })
 
 
 
@@ -65,10 +65,10 @@ const userSchema = new Schema({
 
 userSchema.pre("save", async function (next) {  // simple arrow function is not used here because arrow functions do not hold 
     // the current reference , here this function is being applied on userSchema , so it should hold the reference of userSchema ("this" keyword)
-    if (!this.isModified("password")) return next() // hash only when the password is modified else no need
+    if (!this.isModified("password")) return next // hash only when the password is modified else no need
 
     this.password = await bcrypt.hash(this.password, 10)
-    next()
+    next
     // .hash is a function which is used which bcrypt to hash the currrent password .. 
     // it accepts two parameteres : - the password and a no. (how many rounds)
 })
