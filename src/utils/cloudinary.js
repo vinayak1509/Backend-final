@@ -1,7 +1,6 @@
 // step 1 : Using multer ,  we will take the file from user and upload it temporarily on local server 
 // step 2 : Using cloudinary, we will take that file from the local storage and upload it on the server
 
-import {v2 as cloudinary} from "cloudinary"
 
 import fs from "fs" // filesystem
 import { v2 as cloudinary } from 'cloudinary';
