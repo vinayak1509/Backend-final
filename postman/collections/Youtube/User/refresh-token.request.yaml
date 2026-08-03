@@ -1,0 +1,9 @@
+$kind: http-request
+name: refresh-token
+description: ""
+url: "{{server}}/users/logout"
+method: POST
+body:
+  type: json
+  content: ""
+order: 4497446905380297
